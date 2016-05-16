@@ -1,4 +1,5 @@
 import request from 'request';
+import moment from 'moment';
 /*
  login when server start, save token and time,
  check token time before making each request.
@@ -65,7 +66,28 @@ async function newestSeason(id) {
 
 async function newestEpisode(id) {
   let season = await newestSeason(id);
-  return episodeList(id, season);
+  let epList = await episodeList(id, season);
+
+  return epList.data.reduce((latest, next) => {
+    let nextDiff = moment().diff(moment(next.firstAired));
+    let latestDiff = moment().diff(moment(latest.firstAired));
+
+    // find latest episode
+    if (nextDiff < latestDiff && nextDiff > 0) {
+      return next;
+    }
+
+    // find next episode
+    if (nextDiff < 0) {
+      if (!latest.nextEpisode) latest.nextEpisode = next;
+      if (latest.nextEpisode) {
+        let nextEpDiff = moment().diff(moment(latest.nextEpisode.firstAired));
+        latest.nextEpisode = nextDiff > nextEpDiff ? next : latest.nextEpisode;
+      }
+    }
+
+    return latest;
+  });
 
 }
 
