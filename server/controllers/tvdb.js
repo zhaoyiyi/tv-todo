@@ -12,4 +12,8 @@ function detail(req, res) {
       .then(result => res.json(result.data))
 }
 
-export {search, detail}
+function newestEpisode(req, res) {
+  tvdb.newestEpisode(req.params.id)
+      .then(result => res.json(result));
+}
+export {search, detail, newestEpisode}

@@ -32,7 +32,8 @@ let tvdbRequest = (function () {
       headers: {
         'Authorization': `Bearer ${token.token}`,
         'Accept-Language': 'en'
-      }
+      },
+      json: true
     });
   };
 })();
@@ -47,21 +48,36 @@ async function requestToPromise(option) {
   })
 }
 
-async function search(keyword) {
-  const searchOption = {
+function episodeList(id, season = 1) {
+  return requestToPromise({
+    url: `${API_URL}/series/${id}/episodes/query`,
+    qs: { airedSeason: season }
+  });
+}
+
+async function newestSeason(id) {
+  let seasonList = await requestToPromise({ url: `${API_URL}/series/${id}/episodes/summary` });
+  return seasonList.data.airedSeasons.reduce((acc, curr) => {
+    return acc > +curr ? acc : +curr;
+  }, 0);
+
+}
+
+async function newestEpisode(id) {
+  let season = await newestSeason(id);
+  return episodeList(id, season);
+
+}
+
+function search(keyword) {
+  return requestToPromise({
     url: `${API_URL}/search/series`,
-    qs: {name: keyword},
-    json: true
-  };
-  return await requestToPromise(searchOption);
+    qs: { name: keyword }
+  });
 }
 
-async function getDetail(id) {
-  const searchOption = {
-    url: `${API_URL}/series/${id}`,
-    json: true
-  };
-  return await requestToPromise(searchOption);
+function getDetail(id) {
+  return requestToPromise({ url: `${API_URL}/series/${id}` });
 }
 
-export default { search, getDetail };
+export default { search, getDetail, newestEpisode };
