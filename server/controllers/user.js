@@ -9,10 +9,17 @@ function saveTodo(req, res) {
     { upsert: true }
   )
     .then((user) => {
-      res.send('saved');
+      res.json({ saved: true });
       console.log('user updated', user);
     })
     .catch(err => console.log(err));
 }
 
-export { saveTodo };
+function find(req, res) {
+  console.log(req.params);
+  User.findOne({ email: req.params.email })
+    .then(user => res.json(user))
+    .catch(err => console.log(err));
+}
+
+export { saveTodo, find };
