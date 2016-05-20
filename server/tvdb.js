@@ -61,7 +61,6 @@ async function newestSeason(id) {
   return seasonList.data.airedSeasons.reduce((acc, curr) => {
     return acc > +curr ? acc : +curr;
   }, 0);
-
 }
 
 async function newestEpisode(id) {
