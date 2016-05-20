@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   moduleId: module.id,
@@ -6,6 +6,6 @@ import {Component} from '@angular/core';
   templateUrl: 'tvtodo.component.html',
   styleUrls: ['tvtodo.component.css']
 })
-export class TVtodoAppComponent {
+export class TvtodoAppComponent {
   title = 'tvtodo works!';
 }

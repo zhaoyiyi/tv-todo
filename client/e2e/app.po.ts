@@ -1,4 +1,4 @@
-export class TVtodoPage {
+export class TvtodoPage {
   navigateTo() {
     return browser.get('/');
   }

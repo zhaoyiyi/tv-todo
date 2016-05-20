@@ -1,10 +1,10 @@
-import { TVtodoPage } from './app.po';
+import { TvtodoPage } from './app.po';
 
 describe('tvtodo App', function() {
-  let page: TVtodoPage;
+  let page: TvtodoPage;
 
   beforeEach(() => {
-    page = new TVtodoPage();
+    page = new TvtodoPage();
   })
 
   it('should display message saying app works', () => {
