@@ -3,11 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "angular-cli": {},
-  "scripts": {
-
-  },
+  "scripts": {},
   "private": true,
   "dependencies": {
+    "angular2-jwt": "^0.1.15",
     "babel-preset-node6": "^11.0.0",
     "babel-preset-stage-3": "^6.5.0",
     "babel-register": "^6.8.0",
@@ -17,7 +16,5 @@
     "mongoose": "^4.4.17",
     "request": "^2.72.0"
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }

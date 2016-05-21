@@ -3,11 +3,15 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
-  'moment': 'vendor/moment/moment.js'
+  'moment': 'vendor/moment/moment.js',
+  "angular2-jwt": "vendor/angular2-jwt"
 };
 
 /** User packages configuration. */
 const packages: any = {
+  "angular2-jwt": {
+    "defaultExtension": "js"
+  }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,6 +34,8 @@ const barrels: string[] = [
   // App specific barrels.
   'app',
   'app/shared',
+  'app/show-list',
+  'app/login',
   /** @cli-barrel */
 ];
 

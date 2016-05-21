@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
 
+import { LoginComponent } from './login';
+
 @Component({
   moduleId: module.id,
   selector: 'tvtodo-app',
-  templateUrl: 'tvtodo.component.html',
-  styleUrls: ['tvtodo.component.css']
+  template: `
+    <h1>tv todo</h1>
+    <login></login>
+  `,
+  directives: [LoginComponent]
 })
 export class TvtodoAppComponent {
   title = 'tvtodo works!';
