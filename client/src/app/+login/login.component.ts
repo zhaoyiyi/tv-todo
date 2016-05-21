@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from "../login.service";
+import { AuthService } from '../auth.service';
 
 @Component({
   moduleId: module.id,
@@ -12,7 +12,7 @@ import { LoginService } from "../login.service";
 
 export class LoginComponent implements OnInit {
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: AuthService) {
   }
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   loggedIn() {
-    return this.loginService.loggedIn();
+    return this.loginService.isLoggedIn();
   }
 
 }

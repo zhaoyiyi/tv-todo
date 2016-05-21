@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Routes, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 
 import { LoginComponent } from './+login';
-import { LoginService } from "./login.service";
+import { AuthService } from './auth.service';
 
 @Component({
   moduleId: module.id,
@@ -12,7 +12,7 @@ import { LoginService } from "./login.service";
     <router-outlet></router-outlet>
   `,
   directives: [LoginComponent, ROUTER_DIRECTIVES],
-  providers: [ROUTER_PROVIDERS, LoginService]
+  providers: [ROUTER_PROVIDERS, AuthService]
 })
 @Routes([
   { path: '/login', component: LoginComponent }
