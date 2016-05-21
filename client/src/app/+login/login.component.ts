@@ -1,0 +1,34 @@
+import { Component, OnInit } from '@angular/core';
+import { LoginService } from "../login.service";
+
+@Component({
+  moduleId: module.id,
+  selector: 'login',
+  template: `
+    <button *ngIf="!loggedIn()" (click)="login()">Login</button>
+    <button *ngIf="loggedIn()" (click)="logout()">Logout</button>
+  `
+})
+
+export class LoginComponent implements OnInit {
+
+  constructor(private loginService: LoginService) {
+  }
+
+  ngOnInit() {
+  }
+
+
+  login() {
+    this.loginService.login();
+  }
+
+  logout() {
+    this.loginService.logout();
+  }
+
+  loggedIn() {
+    return this.loginService.loggedIn();
+  }
+
+}
