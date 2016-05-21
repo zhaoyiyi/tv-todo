@@ -11,10 +11,11 @@ mongoose.connect(config.db);
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(`${config.root}/client/dist`));
 app.use('/', routes);
 
 app.get('/', (req, res) => {
-  res.send('Hello world');
+  res.sendFile(`${config.root}/client/dist/index.html`)
 });
 
 

@@ -6,8 +6,9 @@ export const todos = (state = [], { type, payload }) => {
   switch (type) {
     case ADD_TODO:
       return state.concat([Object.assign({}, payload)]);
+    case DELETE_TODO:
+      return;
     default:
       return state;
   }
-
 };
