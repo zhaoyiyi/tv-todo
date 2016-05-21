@@ -1,10 +1,13 @@
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { HTTP_PROVIDERS, Http } from '@angular/http';
 import { enableProdMode } from '@angular/core';
+import { Store, provideStore } from '@ngrx/store';
 import { TvtodoAppComponent, environment } from './app';
 
 if (environment.production) {
   enableProdMode();
 }
 
-bootstrap(TvtodoAppComponent);
+bootstrap(TvtodoAppComponent, [
+  
+]);

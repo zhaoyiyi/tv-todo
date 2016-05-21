@@ -4,13 +4,14 @@
 /** Map relative paths to URLs. */
 const map: any = {
   'moment': 'vendor/moment/moment.js',
-  "angular2-jwt": "vendor/angular2-jwt"
+  'angular2-jwt': 'vendor/angular2-jwt',
+  '@ngrx': 'vender/@ngrx'
 };
 
 /** User packages configuration. */
 const packages: any = {
-  "angular2-jwt": {
-    "defaultExtension": "js"
+  'angular2-jwt': {
+    'defaultExtension': 'js'
   }
 };
 
@@ -35,7 +36,6 @@ const barrels: string[] = [
   'app',
   'app/shared',
   'app/show-list',
-  'app/+login',
   /** @cli-barrel */
 ];
 

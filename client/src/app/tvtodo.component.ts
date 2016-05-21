@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Routes, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 
-import { LoginComponent } from './+login';
+import { ShowListComponent } from './show-list';
+import { LoginComponent } from './login.component';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -9,20 +9,23 @@ import { AuthService } from './auth.service';
   selector: 'tvtodo-app',
   template: `
     <h1>tv todo</h1>
-    <router-outlet></router-outlet>
+    <login></login>
   `,
-  directives: [LoginComponent, ROUTER_DIRECTIVES],
-  providers: [ROUTER_PROVIDERS, AuthService]
+  directives: [LoginComponent, ShowListComponent],
+  providers: [AuthService]
 })
-@Routes([
-  { path: '/login', component: LoginComponent }
-])
+
 export class TvtodoAppComponent implements OnInit {
   title = 'tvtodo works!';
 
-  constructor(private router: Router) { }
+  constructor(
+    private authService: AuthService) { }
 
   ngOnInit() {
-    this.router.navigate(['/login']);
+
+  }
+
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
   }
 }

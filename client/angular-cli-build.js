@@ -13,7 +13,8 @@ module.exports = function(defaults) {
       'rxjs/**/*.js',
       '@angular/**/*.js',
       'moment/moment.js',
-      'angular2-jwt/angular2-jwt.js'
+      'angular2-jwt/angular2-jwt.js',
+      '@ngrx/**/*.js'
     ]
   });
 };
