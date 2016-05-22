@@ -9,7 +9,10 @@ import { ShowService } from './show.service';
     <input type="text" #search
       (keyup)="searchTerm$.next(search.value)">
     <ul>
-      <li *ngFor="let result of results | async">{{result.seriesName}}</li>
+      <li *ngFor="let result of results | async">
+        {{result.seriesName}}
+        <button (click)=addShow(result)>add</button>
+      </li>
     </ul>
   `
 })

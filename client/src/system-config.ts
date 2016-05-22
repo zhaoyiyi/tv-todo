@@ -5,13 +5,17 @@
 const map: any = {
   'moment': 'vendor/moment/moment.js',
   'angular2-jwt': 'vendor/angular2-jwt',
-  '@ngrx': 'vender/@ngrx'
+  '@ngrx': 'vendor/@ngrx'
 };
 
 /** User packages configuration. */
 const packages: any = {
   'angular2-jwt': {
     'defaultExtension': 'js'
+  },
+  '@ngrx/store': {
+    'defaultExtension': 'js',
+    'main': 'index'
   }
 };
 
