@@ -16,7 +16,6 @@ function saveTodo(req, res) {
 }
 
 function find(req, res) {
-  console.log(req.params);
   User.findOne({ email: req.params.email })
     .then(user => res.json(user))
     .catch(err => console.log(err));
