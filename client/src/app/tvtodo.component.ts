@@ -25,12 +25,6 @@ export class TvtodoAppComponent implements OnInit {
     private showSerivce: ShowService) { }
 
   ngOnInit() {
-    this.showSerivce.search('sakamoto')
-      .subscribe(data => console.log(data));
 
-    if (this.authService.isLoggedIn()) {
-      this.authService.getUser('test@test.com')
-        .subscribe(data => console.log(data));
-    }
   }
 }
