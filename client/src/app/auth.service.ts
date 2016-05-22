@@ -2,14 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs/Rx';
 import { AuthHttp, tokenNotExpired } from 'angular2-jwt/angular2-jwt';
 
-import { Show } from './todo';
+import { User } from './interfaces';
 declare var Auth0Lock;
-
-interface User {
-  email: string;
-  id?: string;
-  shows?: Show[];
-}
 
 @Injectable()
 export class AuthService {

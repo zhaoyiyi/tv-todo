@@ -1,12 +1,5 @@
-
-export interface Show {
-  id: string;
-  lastWatched: number;
-};
-
-export const ADD_TODO = 'ADD_TODO';
-export const DELETE_TODO = 'DELETE_TODO';
-export const COMPLETE_TODO = 'COMPLETE_TODO';
+import { ADD_TODO, DELETE_TODO, COMPLETE_TODO } from './actions';
+import { Show } from './interfaces';
 
 export const todos = (state = [], { type, payload }) => {
   switch (type) {

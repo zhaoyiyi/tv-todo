@@ -2,32 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
-interface SearchResult {
-  id: number;
-  aliases: string[];
-  banner: string;
-  overview: string;
-  seriesName: string;
-  status: string;
-}
-
-interface DetailResult extends SearchResult {
-  genre: string[];
-  airsDayOfWeek: string;
-  airsTime: string;
-  network: string;
-  runtime: string;
-}
-
-interface Episode {
-  airedEpisodeNumber: number;
-  airedSeason: number;
-  episodeName: string;
-  firstAired: string;
-  id: number;
-  overview: string;
-  nextEpisode?: Episode;
-}
+import { SearchResult, DetailResult, Episode } from './interfaces';
 
 @Injectable()
 export class ShowService {
