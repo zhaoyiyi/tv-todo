@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
-import { ADD_TODO, DELETE_TODO, COMPLETE_TODO, LOAD_TODO } from './actions';
+import { ADD_TODO, DELETE_TODO, COMPLETE_TODO, UNDO, REDO } from './actions';
 import { ShowListComponent } from './show-list.component';
 import { LoginComponent } from './login.component';
 import { SearchComponent } from './search.component';
 import { AuthService } from './auth.service';
 import { ShowService } from './show.service';
-import { Show } from './interfaces';
+import { Show, Undoable} from './interfaces';
 @Component({
   moduleId: module.id,
   selector: 'tvtodo-app',
@@ -16,6 +16,8 @@ import { Show } from './interfaces';
     <h1>tv todo</h1>
     <login></login>
     <button (click)="onSave()">save</button>
+    <button (click)="undo()">undo</button>
+    <button (click)="redo()">redo</button>
     <search (addShow)="addShow($event)"></search>
     <show-list 
       [shows]="shows$ | async"
@@ -39,8 +41,16 @@ export class TvtodoAppComponent implements OnInit {
     private store: Store<any>) { }
 
   ngOnInit() {
-    this.todos$ = this.store.select('todos').share();
-    this.shows$ = this.todos$.mergeMap((todos: Show[]) => this.showService.getDetail(todos));
+    this.todos$ = this.store.select<Undoable>('todos')
+      .map(todos => {
+        console.log(todos);
+        return todos;
+      })
+      .filter((todos) => todos.present && todos.present.length !== 0)
+      .pluck('present')
+      .share();
+
+    this.shows$ = this.todos$.mergeMap((todos) => this.showService.getDetail(todos));
     this.todos$.subscribe(todos => this.todos = todos);
   }
 
@@ -60,5 +70,13 @@ export class TvtodoAppComponent implements OnInit {
     console.log('saving user');
     this.authService.saveUser(this.todos)
       .subscribe(res => console.log(res));
+  }
+
+  undo() {
+    this.store.dispatch({ type: UNDO });
+  }
+
+  redo() {
+    this.store.dispatch({ type: REDO });
   }
 }

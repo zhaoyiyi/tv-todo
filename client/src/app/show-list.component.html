@@ -1,0 +1,11 @@
+<li *ngFor="let show of shows">
+  <img src="http://thetvdb.com/banners/{{show.detail.banner}}" />
+  <p>{{show.detail.seriesName}}, episode: {{show.episode.airedEpisodeNumber}},
+    watched: {{show.episode.absoluteNumber <= show.todo.watchedEpisode}}
+      <span *ngIf="show.episode.nextEpisode">
+        next episode: {{show.episode.nextEpisode.firstAired}}
+      </span>
+      <button (click)="remove.emit(show)">remove</button>
+      <button (click)="complete.emit(show)">complete</button>
+  </p>
+</li>

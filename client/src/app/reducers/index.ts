@@ -1,5 +1,6 @@
 import { todos } from './todos';
+import { undoable } from './undoable';
 
 export default {
-  todos
+  todos: undoable(todos)
 };

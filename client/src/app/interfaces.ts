@@ -1,3 +1,5 @@
+import {Reducer} from '@ngrx/store';
+
 export interface Show {
   id: string;
   lastWatched: number;
@@ -36,4 +38,16 @@ export interface Episode {
   id: number;
   overview: string;
   nextEpisode?: Episode;
+}
+
+export interface UndoableState {
+  past: any[];
+  present: Reducer<any>;
+  future: any[];
+}
+
+export interface Undoable {
+  past: any[];
+  present: any[];
+  future: any[];
 }
