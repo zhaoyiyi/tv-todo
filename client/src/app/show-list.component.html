@@ -1,24 +1,30 @@
-<md-card *ngFor="let show of shows">
-  <md-card-heder>
-    <md-card-title>{{show.detail.seriesName}}</md-card-title>
-  </md-card-heder>
-  <img md-card-image src="http://thetvdb.com/banners/{{show.detail.banner}}" />
-  <md-card-content>
-    episode: {{show.episode.airedEpisodeNumber}},
-    <span *ngIf="!isWatched(show) && show.todo.watchedEpisode">
-      watched: Season: {{show.todo.watchedEpisode[0]}} Episode: {{show.todo.watchedEpisode[1]}}
-      </span>
-    <span *ngIf="show.episode.nextEpisode">
+<div class="todo-list">
+  <md-card *ngFor="let show of shows" >
+    <md-card-heder>
+      <md-card-title>{{show.detail.seriesName}}</md-card-title>
+    </md-card-heder>
+    <img md-card-image src="http://thetvdb.com/banners/{{show.detail.banner}}" />
+    <md-card-content>
+      <p>
+        Current: Episode {{show.episode.airedEpisodeNumber}} of Season {{show.episode.airedSeason}}
+      </p>
+      <p *ngIf="!isWatched(show) && show.todo.watchedEpisode">
+        watched: Episode {{show.todo.watchedEpisode[1]}} of Season {{show.todo.watchedEpisode[0]}}
+      </p>
+      <p *ngIf="show.episode.nextEpisode">
         next episode: {{show.episode.nextEpisode.firstAired}}
-    </span>
-    <button md-raised-button color="accent" (click)="remove.emit(show)">
-      remove
-    </button>
-    <button md-raised-button color="primary" *ngIf="!isWatched(show)" (click)="complete.emit(show)">
-      complete
-    </button>
-    <button md-raised-button color="warn" *ngIf="isWatched(show)" (click)="unComplete.emit(show)">
-      undo
-    </button>
-  </md-card-content>
-</md-card>
+      </p>
+      <md-card-actions align="end">
+        <button md-mini-fab color="warn" (click)="remove.emit(show)">
+          <md-icon class="md-24">close</md-icon>
+        </button>
+        <button md-mini-fab color color="primary" *ngIf="!isWatched(show)" (click)="complete.emit(show)">
+          <md-icon class="md-24">check</md-icon>
+        </button>
+        <button md-mini-fab color *ngIf="isWatched(show)" (click)="unComplete.emit(show)">
+          undo
+        </button>
+      </md-card-actions>
+    </md-card-content>
+  </md-card>
+</div>

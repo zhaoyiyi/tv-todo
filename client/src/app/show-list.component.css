@@ -1,0 +1,14 @@
+.todo-list {
+   display: flex; 
+   flex-flow: row wrap; 
+   justify-content: center
+}
+
+md-card {
+  margin: 1em;
+  width: 500px;
+}
+
+button {
+  margin: 0 0.5em;
+}
