@@ -1,7 +1,7 @@
 import {Reducer, Action} from '@ngrx/store';
 import { UndoableState } from '../interfaces';
 
-// source: https://github.com/btroncone/ngrx-examples/blob/master/todos-undo-redo/src/app/reducers/undoable.ts
+// edit based on: https://github.com/btroncone/ngrx-examples/blob/master/todos-undo-redo/src/app/reducers/undoable.ts
 
 //based on Rob Wormald's example http://plnkr.co/edit/UnU1wnFcausVFfEP2RGD?p=preview
 /*

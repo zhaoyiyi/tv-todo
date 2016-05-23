@@ -11,5 +11,9 @@ export class ShowListComponent {
   @Input() shows: Array<{ todo: Show, detail: DetailResult, episode: Episode }>;
   @Output() remove = new EventEmitter();
   @Output() complete = new EventEmitter();
+  @Output() unComplete = new EventEmitter();
 
+  isWatched(show) {
+    return show.episode.absoluteNumber <= show.todo.watchedEpisode;
+  }
 }

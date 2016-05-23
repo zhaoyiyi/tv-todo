@@ -4,6 +4,10 @@ export interface Show {
   id: string;
   lastWatched: number;
   watchedEpisode: number;
+  past: {
+    lastWatched?: number;
+    watchedEpisode?: number;
+  };
 };
 
 export interface User {

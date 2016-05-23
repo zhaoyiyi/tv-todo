@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
-import { ADD_TODO, DELETE_TODO, COMPLETE_TODO, UNDO, REDO } from './actions';
+import { ADD_TODO, DELETE_TODO, COMPLETE_TODO, UNDO_TODO, UNDO, REDO } from './actions';
 import { ShowListComponent } from './show-list.component';
 import { LoginComponent } from './login.component';
 import { SearchComponent } from './search.component';
@@ -21,6 +21,7 @@ import { Show, Undoable} from './interfaces';
     <search (addShow)="addShow($event)"></search>
     <show-list 
       [shows]="shows$ | async"
+      (unComplete)="unComplete($event)"
       (complete)="completeShow($event)"
       (remove)="deleteShow($event)">
     </show-list>
@@ -46,7 +47,7 @@ export class TvtodoAppComponent implements OnInit {
         console.log(todos);
         return todos;
       })
-      .filter((todos) => todos.present && todos.present.length !== 0)
+      .filter((todos) => todos.present && todos.present.length >= 0)
       .pluck('present')
       .share();
 
@@ -70,6 +71,10 @@ export class TvtodoAppComponent implements OnInit {
     console.log('saving user');
     this.authService.saveUser(this.todos)
       .subscribe(res => console.log(res));
+  }
+
+  unComplete(show) {
+    this.store.dispatch({ type: UNDO_TODO, payload: show });
   }
 
   undo() {

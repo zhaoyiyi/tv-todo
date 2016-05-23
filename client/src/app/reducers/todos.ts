@@ -1,4 +1,4 @@
-import { ADD_TODO, DELETE_TODO, COMPLETE_TODO, LOAD_TODO } from '../actions';
+import { ADD_TODO, DELETE_TODO, COMPLETE_TODO, LOAD_TODO, UNDO_TODO } from '../actions';
 import { Show } from '../interfaces';
 
 export const todos = (state: Show[] = [], { type, payload }) => {
@@ -10,13 +10,21 @@ export const todos = (state: Show[] = [], { type, payload }) => {
     case COMPLETE_TODO:
       console.log(payload);
       return state.map((todo: Show) => {
-        if (todo.id == payload.id) {
+        if (todo.id === payload.id) {
           return Object.assign({}, todo, {
             lastWatched: Date.now(),
-            watchedEpisode: payload.episode.absoluteNumber
+            watchedEpisode: payload.episode.absoluteNumber,
+            past: {
+              lastWatched: todo.lastWatched,
+              watchedEpisode: todo.watchedEpisode,
+            }
           });
         }
         return todo;
+      });
+    case UNDO_TODO:
+      return state.map(todo => {
+        return todo.id === payload.id ? Object.assign({}, todo, todo.past) : todo;
       });
     case LOAD_TODO:
       return payload;
