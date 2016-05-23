@@ -24,7 +24,8 @@ export const todos = (state: Show[] = [], { type, payload }) => {
       });
     case UNDO_TODO:
       return state.map(todo => {
-        return todo.id === payload.id ? Object.assign({}, todo, todo.past) : todo;
+        return todo.id === payload.id ?
+          Object.assign({}, todo, { watchedEpisode: [0, 0] }, todo.past) : todo;
       });
     case LOAD_TODO:
       return payload;

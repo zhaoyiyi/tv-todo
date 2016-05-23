@@ -7,6 +7,7 @@
 md-card {
   margin: 1em;
   width: 500px;
+  padding-bottom: 0;
 }
 
 button {
