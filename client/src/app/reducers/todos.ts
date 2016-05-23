@@ -13,7 +13,7 @@ export const todos = (state: Show[] = [], { type, payload }) => {
         if (todo.id === payload.id) {
           return Object.assign({}, todo, {
             lastWatched: Date.now(),
-            watchedEpisode: payload.episode.absoluteNumber,
+            watchedEpisode: [payload.episode.airedSeason, payload.episode.airedEpisodeNumber],
             past: {
               lastWatched: todo.lastWatched,
               watchedEpisode: todo.watchedEpisode,
