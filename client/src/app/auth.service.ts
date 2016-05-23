@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Headers, RequestOptions } from '@angular/http';
 import { Observable, Subscriber } from 'rxjs/Rx';
 import { AuthHttp, tokenNotExpired } from 'angular2-jwt/angular2-jwt';
 
-import { User } from './interfaces';
+import { User, Show } from './interfaces';
 declare var Auth0Lock;
 
 @Injectable()
@@ -48,8 +49,13 @@ export class AuthService {
       .map(res => res.json());
   }
 
-  saveUser(user: User): Observable<{ saved: boolean }> {
-    return this.authHttp.post(`/api/user/save`, JSON.stringify(user))
+  saveUser(todos: Show[]): Observable<{ saved: boolean }> {
+    this.user = Object.assign({}, this.user, {shows: todos});
+    const options = new RequestOptions({
+      headers: new Headers({ 'Content-Type': 'application/json'})
+    });
+    console.log(this.user);
+    return this.authHttp.post(`/api/user/save`, JSON.stringify(this.user), options)
       .map(res => res.json());
   }
 }

@@ -15,6 +15,7 @@ import { Show } from './interfaces';
   template: `
     <h1>tv todo</h1>
     <login></login>
+    <button (click)="onSave()">save</button>
     <search (addShow)="addShow($event)"></search>
     <show-list 
       [shows]="shows$ | async"
@@ -29,8 +30,9 @@ import { Show } from './interfaces';
 })
 
 export class TvtodoAppComponent implements OnInit {
-  todos$;
-  shows$;
+  todos$: Observable<any>;
+  shows$: Observable<any>;
+  todos: Show[];
   constructor(
     private authService: AuthService,
     private showService: ShowService,
@@ -39,6 +41,7 @@ export class TvtodoAppComponent implements OnInit {
   ngOnInit() {
     this.todos$ = this.store.select('todos').share();
     this.shows$ = this.todos$.mergeMap((todos: Show[]) => this.showService.getDetail(todos));
+    this.todos$.subscribe(todos => this.todos = todos);
   }
 
   addShow(show) {
@@ -51,5 +54,11 @@ export class TvtodoAppComponent implements OnInit {
 
   deleteShow(show) {
     this.store.dispatch({ type: DELETE_TODO, payload: show });
+  }
+
+  onSave() {
+    console.log('saving user');
+    this.authService.saveUser(this.todos)
+      .subscribe(res => console.log(res));
   }
 }
