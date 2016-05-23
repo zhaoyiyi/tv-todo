@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
-import { ADD_TODO, DELETE_TODO, COMPLETE_TODO } from './actions';
+import { ADD_TODO, DELETE_TODO, COMPLETE_TODO, LOAD_TODO } from './actions';
 import { ShowListComponent } from './show-list.component';
 import { LoginComponent } from './login.component';
 import { SearchComponent } from './search.component';

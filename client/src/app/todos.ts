@@ -1,4 +1,4 @@
-import { ADD_TODO, DELETE_TODO, COMPLETE_TODO } from './actions';
+import { ADD_TODO, DELETE_TODO, COMPLETE_TODO, LOAD_TODO } from './actions';
 import { Show } from './interfaces';
 
 export const todos = (state: Show[] = [], { type, payload }) => {
@@ -14,6 +14,8 @@ export const todos = (state: Show[] = [], { type, payload }) => {
         }
         return todo;
       });
+    case LOAD_TODO:
+      return payload;
     default:
       return state;
   }

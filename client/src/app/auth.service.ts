@@ -44,8 +44,8 @@ export class AuthService {
     return tokenNotExpired();
   }
 
-  getUser(email: string): Observable<User> {
-    return this.authHttp.get(`/api/user/${email}`)
+  getUser(): Observable<User> {
+    return this.authHttp.get(`/api/user/${this.user.email}`)
       .map(res => res.json());
   }
 
