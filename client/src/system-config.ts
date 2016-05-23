@@ -5,7 +5,8 @@
 const map: any = {
   'moment': 'vendor/moment/moment.js',
   'angular2-jwt': 'vendor/angular2-jwt',
-  '@ngrx': 'vendor/@ngrx'
+  '@ngrx': 'vendor/@ngrx',
+  '@angular2-material': 'vendor/@angular2-material'
 };
 
 /** User packages configuration. */
@@ -17,9 +18,20 @@ const packages: any = {
     'defaultExtension': 'js',
     'main': 'index'
   },
-  '@ngrx/devtools': {
-    'defaultExtension': 'js',
-    'main': 'dist/index'
+  '@angular2-material/core': {
+    format: 'cjs',
+    defaultExtension: 'js',
+    main: 'core.js'
+  },
+  '@angular2-material/card': {
+    format: 'cjs',
+    defaultExtension: 'js',
+    main: 'card.js'
+  },
+  '@angular2-material/button': {
+    format: 'cjs',
+    defaultExtension: 'js',
+    main: 'button.js'
   }
 };
 

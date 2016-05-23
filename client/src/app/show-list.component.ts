@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
+import { MdButton } from '@angular2-material/button';
 
 import { Show, DetailResult, Episode } from './interfaces';
 
@@ -11,7 +13,8 @@ interface ShowListItem {
 @Component({
   moduleId: module.id,
   selector: 'show-list',
-  templateUrl: 'show-list.component.html'
+  templateUrl: 'show-list.component.html',
+  directives: [MD_CARD_DIRECTIVES, MdButton]
 })
 export class ShowListComponent {
   @Input() shows: Array<ShowListItem>;

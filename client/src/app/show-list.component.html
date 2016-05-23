@@ -1,14 +1,24 @@
-<li *ngFor="let show of shows">
-  <img src="http://thetvdb.com/banners/{{show.detail.banner}}" />
-  <p>{{show.detail.seriesName}}, episode: {{show.episode.airedEpisodeNumber}},
+<md-card *ngFor="let show of shows">
+  <md-card-heder>
+    <md-card-title>{{show.detail.seriesName}}</md-card-title>
+  </md-card-heder>
+  <img md-card-image src="http://thetvdb.com/banners/{{show.detail.banner}}" />
+  <md-card-content>
+    episode: {{show.episode.airedEpisodeNumber}},
     <span *ngIf="!isWatched(show) && show.todo.watchedEpisode">
       watched: Season: {{show.todo.watchedEpisode[0]}} Episode: {{show.todo.watchedEpisode[1]}}
       </span>
     <span *ngIf="show.episode.nextEpisode">
         next episode: {{show.episode.nextEpisode.firstAired}}
-      </span>
-    <button (click)="remove.emit(show)">remove</button>
-    <button *ngIf="!isWatched(show)" (click)="complete.emit(show)">complete</button>
-    <button *ngIf="isWatched(show)" (click)="unComplete.emit(show)">undo</button>
-  </p>
-</li>
+    </span>
+    <button md-raised-button color="accent" (click)="remove.emit(show)">
+      remove
+    </button>
+    <button md-raised-button color="primary" *ngIf="!isWatched(show)" (click)="complete.emit(show)">
+      complete
+    </button>
+    <button md-raised-button color="warn" *ngIf="isWatched(show)" (click)="unComplete.emit(show)">
+      undo
+    </button>
+  </md-card-content>
+</md-card>
