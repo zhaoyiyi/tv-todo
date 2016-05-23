@@ -49,7 +49,8 @@ export class LoginComponent implements OnInit {
 
   loadUser() {
     this.authService.getUser().subscribe(user => {
-      const todos = user.shows;
+      console.log(user);
+      const todos = user.shows || [];
       this.store.dispatch({ type: LOAD_TODO, payload: todos });
     });
   }

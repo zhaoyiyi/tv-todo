@@ -24,7 +24,7 @@ export class ShowService {
   }
 
   getDetail(todos: Show[]) {
-    console.log(todos);
+    if (!todos) return Observable.of([]);
     return Observable.from(todos)
       .filter((todo) => todo.id ? true : false)
       .mergeMap((todo) => {

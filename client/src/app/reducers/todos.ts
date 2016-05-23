@@ -8,7 +8,6 @@ export const todos = (state: Show[] = [], { type, payload }) => {
     case DELETE_TODO:
       return state.filter(todo => todo.id !== payload.id);
     case COMPLETE_TODO:
-      console.log(payload);
       return state.map((todo: Show) => {
         if (todo.id === payload.id) {
           return Object.assign({}, todo, {

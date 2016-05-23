@@ -7,9 +7,10 @@ import { isWatched } from './reducers/index';
 import { ShowListComponent } from './show-list.component';
 import { LoginComponent } from './login.component';
 import { SearchComponent } from './search.component';
+import { FilterSelectorComponent } from './filter-selector.component';
 import { AuthService } from './auth.service';
 import { ShowService } from './show.service';
-import { Show, Undoable} from './interfaces';
+import { Show, Undoable, ShowListItem} from './interfaces';
 @Component({
   moduleId: module.id,
   selector: 'tvtodo-app',
@@ -19,24 +20,22 @@ import { Show, Undoable} from './interfaces';
     <button (click)="onSave()">save</button>
     <button (click)="undo()">undo</button>
     <button (click)="redo()">redo</button>
+    <filter-selector (filterChange)="onFilterChange($event)"></filter-selector>
     <search (addShow)="addShow($event)"></search>
     <show-list 
-      [shows]="shows$ | async"
+      [shows]="todos$ | async"
       [isWatched]="isWatched"
       (unComplete)="unComplete($event)"
       (complete)="completeShow($event)"
       (remove)="deleteShow($event)">
     </show-list>
-    <hr />
-    {{ todos$ | async | json}}
   `,
-  directives: [LoginComponent, ShowListComponent, SearchComponent],
+  directives: [LoginComponent, ShowListComponent, SearchComponent, FilterSelectorComponent],
   providers: [AuthService, ShowService]
 })
 
 export class TvtodoAppComponent implements OnInit {
   todos$: Observable<any>;
-  shows$: Observable<any>;
   todos: Show[];
   isWatched = isWatched;
   constructor(
@@ -45,18 +44,19 @@ export class TvtodoAppComponent implements OnInit {
     private store: Store<any>) { }
 
   ngOnInit() {
-    console.log(isWatched);
-    this.todos$ = this.store.select<Undoable>('todos')
-      .map(todos => {
+    this.todos$ = Observable.combineLatest(
+      this.store.select<Undoable>('todos')
+        .pluck('present')
+        .mergeMap((todos: Show[]) => this.showService.getDetail(todos)),
+      this.store.select('visibilityFilter'),
+      (todos: ShowListItem[], filter) => {
         console.log(todos);
-        return todos;
-      })
-      .filter((todos) => todos.present && todos.present.length >= 0)
-      .pluck('present')
-      .share();
+        return todos.filter(filter);
+      }).share();
 
-    this.shows$ = this.todos$.mergeMap((todos) => this.showService.getDetail(todos));
-    this.todos$.subscribe(todos => this.todos = todos);
+    this.todos$
+      .map((todos: ShowListItem[]) => todos.map(item => item.todo))
+      .subscribe((todos: Show[]) => this.todos = todos);
   }
 
   addShow(show) {
@@ -69,6 +69,10 @@ export class TvtodoAppComponent implements OnInit {
 
   deleteShow(show) {
     this.store.dispatch({ type: DELETE_TODO, payload: show });
+  }
+
+  onFilterChange(filterName) {
+    this.store.dispatch({ type: filterName });
   }
 
   onSave() {
