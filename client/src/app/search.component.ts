@@ -22,6 +22,7 @@ export class SearchComponent implements OnInit {
   results = this.searchTerm$
     .debounceTime(500)
     .distinctUntilChanged()
+    .map(term => term.length > 3 ? term : '')
     .switchMap(term => this.showService.search(term));
 
   constructor(

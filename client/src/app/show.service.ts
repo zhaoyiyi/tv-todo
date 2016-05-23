@@ -17,6 +17,8 @@ export class ShowService {
   }
 
   search(word: string): Observable<SearchResult[]> {
+    if (!word) return Observable.of([]);
+
     return this.http.get(`/api/tvdb/${word}`)
       .map(res => res.json());
   }
@@ -31,18 +33,14 @@ export class ShowService {
           this.newestEpisode(todo.id),
           (detail, episode) => ({ id: todo.id, todo, detail, episode }));
       })
-      .toArray()
-      .map(ts => {
-        console.log(ts);
-        return ts;
-      });
+      .toArray();
   }
 
   private detail(id: string): Observable<DetailResult[]> {
     if (this.shows.detail[id]) {
       return Observable.of(this.shows.detail[id]);
     }
-    console.log(id);
+
     return this.http.get(`/api/tvdb/detail/${id}`)
       .map(res => {
         this.shows.detail[id] = res.json();
