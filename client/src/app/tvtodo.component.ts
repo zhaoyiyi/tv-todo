@@ -1,30 +1,55 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Rx';
 
-import { ShowListComponent } from './show-list';
+import { ADD_TODO, DELETE_TODO, COMPLETE_TODO } from './actions';
+import { ShowListComponent } from './show-list.component';
 import { LoginComponent } from './login.component';
 import { SearchComponent } from './search.component';
 import { AuthService } from './auth.service';
 import { ShowService } from './show.service';
+import { Show } from './interfaces';
 @Component({
   moduleId: module.id,
   selector: 'tvtodo-app',
   template: `
     <h1>tv todo</h1>
     <login></login>
-    <search></search>
+    <search (addShow)="addShow($event)"></search>
+    <show-list 
+      [shows]="shows$ | async"
+      (complete)="completeShow($event)"
+      (remove)="deleteShow($event)">
+    </show-list>
+    <hr />
+    {{ todos$ | async | json}}
   `,
   directives: [LoginComponent, ShowListComponent, SearchComponent],
   providers: [AuthService, ShowService]
 })
 
 export class TvtodoAppComponent implements OnInit {
-  title = 'tvtodo works!';
-
+  todos$;
+  shows$;
   constructor(
     private authService: AuthService,
-    private showSerivce: ShowService) { }
+    private showService: ShowService,
+    private store: Store<any>) { }
 
   ngOnInit() {
+    this.todos$ = this.store.select('todos').share();
+    this.shows$ = this.todos$.mergeMap((todos: Show[]) => this.showService.getDetail(todos));
+  }
 
+  addShow(show) {
+    this.store.dispatch({ type: ADD_TODO, payload: show });
+  }
+
+  completeShow(show) {
+    this.store.dispatch({ type: COMPLETE_TODO, payload: show });
+  }
+
+  deleteShow(show) {
+    this.store.dispatch({ type: DELETE_TODO, payload: show });
   }
 }

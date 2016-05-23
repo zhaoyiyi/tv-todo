@@ -16,6 +16,10 @@ const packages: any = {
   '@ngrx/store': {
     'defaultExtension': 'js',
     'main': 'index'
+  },
+  '@ngrx/devtools': {
+    'defaultExtension': 'js',
+    'main': 'dist/index'
   }
 };
 
