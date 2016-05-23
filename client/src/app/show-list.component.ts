@@ -3,13 +3,9 @@ import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 import { MdButton, MdAnchor } from '@angular2-material/button';
 import { MdIcon } from '@angular2-material/icon';
 
-import { Show, DetailResult, Episode } from './interfaces';
+import { ShowListItem } from './interfaces';
 
-interface ShowListItem {
-  todo: Show;
-  detail: DetailResult;
-  episode: Episode;
-}
+
 
 @Component({
   moduleId: module.id,
@@ -20,14 +16,10 @@ interface ShowListItem {
 })
 export class ShowListComponent {
   @Input() shows: Array<ShowListItem>;
+  @Input() isWatched: Function;
+
   @Output() remove = new EventEmitter();
   @Output() complete = new EventEmitter();
   @Output() unComplete = new EventEmitter();
 
-  isWatched(show: ShowListItem) {
-    if (!show.todo.watchedEpisode) return false;
-
-    return show.todo.watchedEpisode[0] >= show.episode.airedSeason
-      && show.todo.watchedEpisode[1] >= show.episode.airedEpisodeNumber;
-  }
 }

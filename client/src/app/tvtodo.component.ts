@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 
 import { ADD_TODO, DELETE_TODO, COMPLETE_TODO, UNDO_TODO, UNDO, REDO } from './actions';
+import { isWatched } from './reducers/index';
 import { ShowListComponent } from './show-list.component';
 import { LoginComponent } from './login.component';
 import { SearchComponent } from './search.component';
@@ -21,6 +22,7 @@ import { Show, Undoable} from './interfaces';
     <search (addShow)="addShow($event)"></search>
     <show-list 
       [shows]="shows$ | async"
+      [isWatched]="isWatched"
       (unComplete)="unComplete($event)"
       (complete)="completeShow($event)"
       (remove)="deleteShow($event)">
@@ -36,12 +38,14 @@ export class TvtodoAppComponent implements OnInit {
   todos$: Observable<any>;
   shows$: Observable<any>;
   todos: Show[];
+  isWatched = isWatched;
   constructor(
     private authService: AuthService,
     private showService: ShowService,
     private store: Store<any>) { }
 
   ngOnInit() {
+    console.log(isWatched);
     this.todos$ = this.store.select<Undoable>('todos')
       .map(todos => {
         console.log(todos);

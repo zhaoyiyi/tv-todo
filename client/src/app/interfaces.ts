@@ -55,3 +55,9 @@ export interface Undoable {
   present: any[];
   future: any[];
 }
+
+export interface ShowListItem {
+  todo: Show;
+  detail: DetailResult;
+  episode: Episode;
+}
