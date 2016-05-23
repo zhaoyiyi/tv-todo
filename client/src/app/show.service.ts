@@ -28,7 +28,7 @@ export class ShowService {
         return Observable.zip(
           this.detail(todo.id),
           this.newestEpisode(todo.id),
-          (detail, episode) => ({ id: todo.id, detail, episode }));
+          (detail, episode) => ({ id: todo.id, todo, detail, episode }));
       })
       .toArray()
       .map(ts => {

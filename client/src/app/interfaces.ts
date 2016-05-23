@@ -1,6 +1,7 @@
 export interface Show {
   id: string;
   lastWatched: number;
+  watchedEpisode: number;
 };
 
 export interface User {
@@ -27,6 +28,7 @@ export interface DetailResult extends SearchResult {
 }
 
 export interface Episode {
+  absoluteNumber: number;
   airedEpisodeNumber: number;
   airedSeason: number;
   episodeName: string;

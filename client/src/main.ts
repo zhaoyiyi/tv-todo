@@ -4,7 +4,7 @@ import { enableProdMode } from '@angular/core';
 import { provideStore } from '@ngrx/store';
 import { AUTH_PROVIDERS } from 'angular2-jwt/angular2-jwt';
 import { TvtodoAppComponent, environment } from './app';
-import { todos } from './app/todos';
+import reducers from './app/reducers/index';
 
 if (environment.production) {
   enableProdMode();
@@ -13,5 +13,5 @@ if (environment.production) {
 bootstrap(TvtodoAppComponent, [
   HTTP_PROVIDERS,
   AUTH_PROVIDERS,
-  provideStore({todos})
+  provideStore(reducers)
 ]);

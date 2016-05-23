@@ -2,7 +2,8 @@ import mongoose from 'mongoose';
 
 const showSchema = new mongoose.Schema({
   id: String,
-  lastWatched: Number
+  lastWatched: Number,
+  watchedEpisode: Number
 });
 
 const userSchema = new mongoose.Schema({
