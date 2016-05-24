@@ -20,7 +20,12 @@ import { Show, Undoable, ShowListItem} from './interfaces';
     <button (click)="onSave()">save</button>
     <button (click)="undo()">undo</button>
     <button (click)="redo()">redo</button>
-    <filter-selector (filterChange)="onFilterChange($event)"></filter-selector>
+    
+    <filter-selector 
+      (orderChange)="onOrderChange($event)"
+      (filterChange)="onFilterChange($event)">
+    </filter-selector>
+    
     <search (addShow)="addShow($event)"></search>
     <show-list 
       [shows]="todos$ | async"
@@ -49,9 +54,10 @@ export class TvtodoAppComponent implements OnInit {
         .pluck('present')
         .mergeMap((todos: Show[]) => this.showService.getDetail(todos)),
       this.store.select('visibilityFilter'),
-      (todos: ShowListItem[], filter) => {
+      this.store.select('order'),
+      (todos: ShowListItem[], visibilityFilter, order) => {
         console.log(todos);
-        return todos.filter(filter);
+        return order(todos).filter(visibilityFilter);
       }).share();
 
     this.todos$
@@ -73,6 +79,9 @@ export class TvtodoAppComponent implements OnInit {
 
   onFilterChange(filterName) {
     this.store.dispatch({ type: filterName });
+  }
+  onOrderChange(order) {
+    this.store.dispatch({ type: order });
   }
 
   onSave() {

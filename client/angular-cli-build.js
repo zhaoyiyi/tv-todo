@@ -15,7 +15,8 @@ module.exports = function(defaults) {
       'moment/moment.js',
       'angular2-jwt/angular2-jwt.js',
       '@ngrx/**/*.js',
-      '@angular2-material/**/*.js'
+      '@angular2-material/**/*.js',
+      'lodash/lodash.min.js'
     ]
   });
 };

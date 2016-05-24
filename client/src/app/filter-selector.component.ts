@@ -1,5 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { DISPLAY_ALL, DISPLAY_UNWATCHED, DISPLAY_WATCHED} from './actions';
+import {
+  DISPLAY_ALL, DISPLAY_UNWATCHED, DISPLAY_WATCHED,
+  ORDER_NAME, ORDER_NEXT_EPISODE
+} from './actions';
 
 @Component({
   moduleId: module.id,
@@ -10,6 +13,12 @@ import { DISPLAY_ALL, DISPLAY_UNWATCHED, DISPLAY_WATCHED} from './actions';
         {{filter.name}}
       </option>
     </select>
+    <div *ngFor="let order of orders">
+       <input type="radio" name="showOrders" value="{{order.value}}" 
+        (click)="orderChange.emit(order.value)" /> 
+       {{order.name}}
+    </div>
+   
   `
 })
 export class FilterSelectorComponent implements OnInit {
@@ -19,7 +28,13 @@ export class FilterSelectorComponent implements OnInit {
     { name: 'unwatched', value: DISPLAY_UNWATCHED }
   ];
 
+  orders = [
+    { name: 'name', value: ORDER_NAME },
+    { name: 'next episode', value: ORDER_NEXT_EPISODE },
+  ];
+
   @Output() filterChange = new EventEmitter();
+  @Output() orderChange = new EventEmitter();
 
   constructor() { }
 

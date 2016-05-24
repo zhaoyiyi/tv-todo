@@ -6,7 +6,8 @@ const map: any = {
   'moment': 'vendor/moment/moment.js',
   'angular2-jwt': 'vendor/angular2-jwt',
   '@ngrx': 'vendor/@ngrx',
-  '@angular2-material': 'vendor/@angular2-material'
+  '@angular2-material': 'vendor/@angular2-material',
+  'lodash': 'vendor/lodash/lodash.min.js'
 };
 
 /** User packages configuration. */
@@ -15,6 +16,10 @@ const packages: any = {
     'defaultExtension': 'js'
   },
   '@ngrx/store': {
+    'defaultExtension': 'js',
+    'main': 'index'
+  },
+  'lodash': {
     'defaultExtension': 'js',
     'main': 'index'
   },
