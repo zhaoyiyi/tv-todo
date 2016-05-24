@@ -1,11 +1,21 @@
 .controls {
   display: flex;
   flex-flow: row wrap;
-  justify-content: center
+  justify-content: space-between;
+  width: 100%;
 }
 
 .control {
-  width: 100%;
   text-align: center;
-  margin: 0.5em
+  margin: 0.5em;
+  display: flex;
+  align-items: center;
+}
+
+.control button {
+  margin: 8px;
+}
+
+search {
+  width: 100%;
 }

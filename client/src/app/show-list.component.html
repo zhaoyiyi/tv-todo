@@ -12,7 +12,9 @@
         Watched: Episode {{show.todo.watchedEpisode[1]}} of Season {{show.todo.watchedEpisode[0]}}
       </p>
       <p *ngIf="show.episode.nextEpisode">
-        Next episode on: {{show.episode.nextEpisode.firstAired}}
+        Next episode {{moment().to(show.episode.nextEpisode.firstAired)}}, 
+        on {{moment(show.episode.nextEpisode.firstAired).format('dddd, MMM DD')}} 
+        
       </p>
       <md-card-actions align="end">
         <button md-mini-fab color="warn" (click)="remove.emit(show)">

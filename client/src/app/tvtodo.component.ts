@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import { MdButton, MdAnchor } from '@angular2-material/button';
+import { MdToolbar } from '@angular2-material/toolbar/toolbar';
+import { MdIcon } from '@angular2-material/icon';
+
+
 
 import { ADD_TODO, DELETE_TODO, COMPLETE_TODO, UNDO_TODO, UNDO, REDO } from './actions';
 import { isWatched } from './reducers/index';
@@ -19,7 +23,7 @@ import { Show, Undoable, ShowListItem} from './interfaces';
   styleUrls: ['tvtodo.component.css'],
   directives: [
     LoginComponent, ShowListComponent, SearchComponent,
-    FilterSelectorComponent, MdButton
+    FilterSelectorComponent, MdButton, MdToolbar, MdIcon
   ],
   providers: [AuthService, ShowService]
 })

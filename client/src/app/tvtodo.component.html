@@ -1,26 +1,33 @@
 <!-- login -->
-<div class="">
-  <login></login>
-</div>
+<login></login>
 
 <div *ngIf="isLoggedIn()">
-  <div class="controls">
-    <!-- buttons -->
-    <div class="control">
-      <button md-raised-button (click)="onSave()">save</button>
-      <button md-raised-button (click)="undo()">undo</button>
-      <button md-raised-button (click)="redo()">redo</button>
+  <md-toolbar>
+    <div class="controls">
+      <!-- filters -->
+      <div class="control">
+        <filter-selector (orderChange)="onOrderChange($event)" (filterChange)="onFilterChange($event)">
+        </filter-selector>
+      </div>
+      
+      <!-- buttons -->
+      <div class="control">
+        <button md-raised-button color="primary" (click)="onSave()">save</button>
+        
+        <button md-mini-fab (click)="undo()">
+          <md-icon class="md-24">undo</md-icon>
+        </button>
+        
+        <button md-mini-fab (click)="redo()">
+          <md-icon class="md-24">redo</md-icon>
+        </button>
+      </div>
     </div>
-    <!-- filters -->
-    <div class="control">
-      <filter-selector (orderChange)="onOrderChange($event)" (filterChange)="onFilterChange($event)">
-      </filter-selector>
-    </div>
+  </md-toolbar>
 
-    <!-- Search -->
-    <div class="control">
-      <search (addShow)="addShow($event)"></search>
-    </div>
+  <!-- Search -->
+  <div class="control">
+    <search (addShow)="addShow($event)"></search>
   </div>
 
 

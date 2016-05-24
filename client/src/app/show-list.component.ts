@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 import { MdButton, MdAnchor } from '@angular2-material/button';
 import { MdIcon } from '@angular2-material/icon';
+import * as moment from 'moment';
 
 import { ShowListItem } from './interfaces';
 
@@ -15,6 +16,7 @@ import { ShowListItem } from './interfaces';
   directives: [MD_CARD_DIRECTIVES, MdButton, MdIcon, MdAnchor]
 })
 export class ShowListComponent {
+  moment = moment;
   @Input() shows: Array<ShowListItem>;
   @Input() isWatched: Function;
 

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { MdToolbar } from '@angular2-material/toolbar/toolbar';
+import { MdButton, MdAnchor } from '@angular2-material/button';
 
 import { LOAD_TODO } from './actions';
 import { AuthService } from './auth.service';
@@ -8,11 +10,18 @@ import { AuthService } from './auth.service';
   moduleId: module.id,
   selector: 'login',
   template: `
-    <button *ngIf="!isLoggedIn()" (click)="login()">Login</button>
-    <button *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
-    <p *ngIf="email">Hello {{email}}</p>
-    <p *ngIf="!email">Please login</p>
-  `
+    <md-toolbar color="primary">
+      <span style="flex: 1; text-align: right">
+        <span *ngIf="email">Hello {{email}}</span>
+        <span *ngIf="!email">Please login</span>
+        <button md-raised-button color="warn" 
+          *ngIf="!isLoggedIn()" (click)="login()">Login</button>
+        <button md-raised-button color="warn" 
+          *ngIf="isLoggedIn()" (click)="logout()">Logout</button>  
+      </span>
+    </md-toolbar>
+  `,
+  directives: [MdToolbar, MdButton]
 })
 
 export class LoginComponent implements OnInit {
@@ -34,9 +43,9 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login()
       .subscribe(
-        email => this.email = email,
-        err => console.log(err),
-        () => this.loadUser()
+      email => this.email = email,
+      err => console.log(err),
+      () => this.loadUser()
       );
   }
 
