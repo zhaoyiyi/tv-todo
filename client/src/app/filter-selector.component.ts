@@ -10,7 +10,8 @@ import {
   moduleId: module.id,
   selector: 'filter-selector',
   template: `
-    <select #filterList (change)="filterChange.emit(filterList.value)">
+    <select class="ui dropdown" #filterList
+        (change)="filterChange.emit(filterList.value)">
       <option *ngFor="let filter of filters" value="{{filter.value}}">
         {{filter.name}}
       </option>

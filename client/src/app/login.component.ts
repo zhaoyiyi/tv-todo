@@ -10,7 +10,8 @@ import { AuthService } from './auth.service';
   template: `
     <button *ngIf="!isLoggedIn()" (click)="login()">Login</button>
     <button *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
-    <p>{{email}}</p>
+    <p *ngIf="email">Hello {{email}}</p>
+    <p *ngIf="!email">Please login</p>
   `
 })
 
@@ -41,6 +42,7 @@ export class LoginComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.email = '';
   }
 
   isLoggedIn() {

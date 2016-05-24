@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
+import { MdButton, MdAnchor } from '@angular2-material/button';
 
 import { ADD_TODO, DELETE_TODO, COMPLETE_TODO, UNDO_TODO, UNDO, REDO } from './actions';
 import { isWatched } from './reducers/index';
@@ -14,28 +15,11 @@ import { Show, Undoable, ShowListItem} from './interfaces';
 @Component({
   moduleId: module.id,
   selector: 'tvtodo-app',
-  template: `
-    <h1>tv todo</h1>
-    <login></login>
-    <button (click)="onSave()">save</button>
-    <button (click)="undo()">undo</button>
-    <button (click)="redo()">redo</button>
-    
-    <filter-selector 
-      (orderChange)="onOrderChange($event)"
-      (filterChange)="onFilterChange($event)">
-    </filter-selector>
-    
-    <search (addShow)="addShow($event)"></search>
-    <show-list 
-      [shows]="todos$ | async"
-      [isWatched]="isWatched"
-      (unComplete)="unComplete($event)"
-      (complete)="completeShow($event)"
-      (remove)="deleteShow($event)">
-    </show-list>
-  `,
-  directives: [LoginComponent, ShowListComponent, SearchComponent, FilterSelectorComponent],
+  templateUrl: 'tvtodo.component.html',
+  directives: [
+    LoginComponent, ShowListComponent, SearchComponent,
+    FilterSelectorComponent, MdButton
+  ],
   providers: [AuthService, ShowService]
 })
 
@@ -100,5 +84,9 @@ export class TvtodoAppComponent implements OnInit {
 
   redo() {
     this.store.dispatch({ type: REDO });
+  }
+  
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
   }
 }
