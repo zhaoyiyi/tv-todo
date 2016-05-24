@@ -10,7 +10,7 @@
         <span class="episode">Episode {{show.episode.airedEpisodeNumber}}</span>
         of Season {{show.episode.airedSeason}}
       </p>
-      <p *ngIf="!isWatched(show) && show.todo.watchedEpisode">
+      <p *ngIf="!isWatched(show) && show.todo.watchedEpisode && show.todo.watchedEpisode[0]">
         Watched: Episode {{show.todo.watchedEpisode[1]}} of Season {{show.todo.watchedEpisode[0]}}
       </p>
       <p *ngIf="show.episode.nextEpisode">
