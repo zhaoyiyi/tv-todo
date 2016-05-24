@@ -1,27 +1,29 @@
-<h1>tv todo</h1>
 <!-- login -->
 <div class="">
   <login></login>
 </div>
 
 <div *ngIf="isLoggedIn()">
-  <div class="">
+  <div class="controls">
     <!-- buttons -->
-    <div class="">
+    <div class="control">
       <button md-raised-button (click)="onSave()">save</button>
       <button md-raised-button (click)="undo()">undo</button>
       <button md-raised-button (click)="redo()">redo</button>
     </div>
     <!-- filters -->
-    <div class="">
+    <div class="control">
       <filter-selector (orderChange)="onOrderChange($event)" (filterChange)="onFilterChange($event)">
       </filter-selector>
+    </div>
+
+    <!-- Search -->
+    <div class="control">
+      <search (addShow)="addShow($event)"></search>
     </div>
   </div>
 
 
-
-  <search (addShow)="addShow($event)"></search>
   <show-list [shows]="todos$ | async" [isWatched]="isWatched" (unComplete)="unComplete($event)" (complete)="completeShow($event)"
     (remove)="deleteShow($event)">
   </show-list>

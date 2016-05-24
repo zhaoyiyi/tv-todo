@@ -10,13 +10,14 @@ import {
   moduleId: module.id,
   selector: 'filter-selector',
   template: `
-    <select class="ui dropdown" #filterList
+    Filter: <select class="ui dropdown" #filterList
         (change)="filterChange.emit(filterList.value)">
       <option *ngFor="let filter of filters" value="{{filter.value}}">
         {{filter.name}}
       </option>
     </select>
-    <md-radio-button name="showOrders" *ngFor="let order of orders" style="margin: 8px"
+    
+    Sort by: <md-radio-button name="showOrders" *ngFor="let order of orders" style="margin: 8px"
       value="{{order.value}}" 
       (click)="orderChange.emit(order.value)">
         {{order.name}}

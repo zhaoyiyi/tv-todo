@@ -16,6 +16,7 @@ import { Show, Undoable, ShowListItem} from './interfaces';
   moduleId: module.id,
   selector: 'tvtodo-app',
   templateUrl: 'tvtodo.component.html',
+  styleUrls: ['tvtodo.component.css'],
   directives: [
     LoginComponent, ShowListComponent, SearchComponent,
     FilterSelectorComponent, MdButton
@@ -85,7 +86,7 @@ export class TvtodoAppComponent implements OnInit {
   redo() {
     this.store.dispatch({ type: REDO });
   }
-  
+
   isLoggedIn() {
     return this.authService.isLoggedIn();
   }

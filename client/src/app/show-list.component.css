@@ -14,3 +14,7 @@ md-card {
 button {
   margin: 0 0.5em;
 }
+
+.episode {
+  color: #039BE5;
+}

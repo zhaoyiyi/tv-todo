@@ -14,8 +14,10 @@ import { ShowService } from './show.service';
     Search <md-input placeholder="TV shows" #search
       (keyup)="searchTerm$.next(search.value)"></md-input>
       
-    <md-nav-list>
-      <md-list-item *ngFor="let show of results | async" #item
+    <md-nav-list 
+      style="display: flex; flex-flow: column wrap; align-items: center;">
+      <md-list-item style="width: 50%; text-align: center" 
+        *ngFor="let show of results | async" #item
         (click)="onAdd(show)">
           {{show.seriesName}}
       </md-list-item>
