@@ -17,7 +17,16 @@ function saveTodo(req, res) {
 
 function find(req, res) {
   User.findOne({ email: req.params.email })
-    .then(user => res.json(user))
+    .then(user => {
+      console.log(user);
+      if (!user) {
+        const user = new User({email: req.params.email});
+        user.save();
+        console.log(user);
+        return res.json(user);
+      }
+      res.json(user);
+    })
     .catch(err => console.log(err));
 }
 
