@@ -4,6 +4,9 @@
    justify-content: center;
    align-items: center;
 }
+p {
+  line-height: 2;
+}
 
 md-card {
   margin: 1em;
@@ -13,6 +16,10 @@ md-card {
 
 button {
   margin: 0 0.5em;
+}
+
+[md-fab] i, [md-fab] md-icon {
+  padding: 8px 0;
 }
 
 .episode {

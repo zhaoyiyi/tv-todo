@@ -6,21 +6,24 @@
     <img md-card-image src="http://thetvdb.com/banners/{{show.detail.banner}}" />
     <md-card-content>
       <p>
-        Newest: <span class="episode">Episode {{show.episode.airedEpisodeNumber}}</span> of Season {{show.episode.airedSeason}}
+        Newest: 
+        <span class="episode">Episode {{show.episode.airedEpisodeNumber}}</span>
+        of Season {{show.episode.airedSeason}}
       </p>
       <p *ngIf="!isWatched(show) && show.todo.watchedEpisode">
         Watched: Episode {{show.todo.watchedEpisode[1]}} of Season {{show.todo.watchedEpisode[0]}}
       </p>
       <p *ngIf="show.episode.nextEpisode">
-        Next episode {{moment().to(show.episode.nextEpisode.firstAired)}}, 
-        on {{moment(show.episode.nextEpisode.firstAired).format('dddd, MMM DD')}} 
-        
+        Next episode {{nextEpisodeTime(show).time}}{{nextEpisodeTime(show).date}} 
+      </p>
+      <p *ngIf="!show.episode.nextEpisode">
+        no next episode information available
       </p>
       <md-card-actions align="end">
-        <button md-mini-fab color="warn" (click)="remove.emit(show)">
+        <button md-fab class="md-mini md-warn" (click)="remove.emit(show)">
           <md-icon class="md-24">close</md-icon>
         </button>
-        <button md-mini-fab color="primary" *ngIf="!isWatched(show)" (click)="complete.emit(show)">
+        <button md-fab class="md-mini md-primary" *ngIf="!isWatched(show)" (click)="complete.emit(show)">
           <md-icon class="md-24">check</md-icon>
         </button>
         <button md-button *ngIf="isWatched(show)" (click)="unComplete.emit(show)">
