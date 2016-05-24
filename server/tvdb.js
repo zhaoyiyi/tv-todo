@@ -27,7 +27,6 @@ let tvdbRequest = (function () {
     }
   });
   return async function () {
-    console.log('checking token');
     token = await getToken;
     return request.defaults({
       headers: {
@@ -54,6 +53,8 @@ async function episodeList(id, season = 1, page) {
     url: `${API_URL}/series/${id}/episodes/query`,
     qs: { airedSeason: season, page: page }
   });
+  const seasonFirstAired = result.data[0].firstAired;
+  if ( !seasonFirstAired ) return await episodeList(id, season - 1, page);
   const lastPage = result.links.last;
   return page === lastPage ?  result : await episodeList(id, season, lastPage);
 }
