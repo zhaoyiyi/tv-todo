@@ -49,11 +49,13 @@ async function requestToPromise(option) {
   })
 }
 
-function episodeList(id, season = 1) {
-  return requestToPromise({
+async function episodeList(id, season = 1, page) {
+  const result = await requestToPromise({
     url: `${API_URL}/series/${id}/episodes/query`,
-    qs: { airedSeason: season }
+    qs: { airedSeason: season, page: page }
   });
+  const lastPage = result.links.last;
+  return page === lastPage ?  result : await episodeList(id, season, lastPage);
 }
 
 async function newestSeason(id) {
@@ -66,7 +68,7 @@ async function newestSeason(id) {
 async function newestEpisode(id) {
   let season = await newestSeason(id);
   let epList = await episodeList(id, season);
-
+  
   return epList.data.reduce((latest, next) => {
     let nextDiff = moment().diff(moment(next.firstAired));
     let latestDiff = moment().diff(moment(latest.firstAired));

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MdToolbar } from '@angular2-material/toolbar/toolbar';
-import { MdButton, MdAnchor } from '@angular2-material/button';
+import { MdButton } from '@angular2-material/button';
 
 import { LOAD_TODO } from './actions';
 import { AuthService } from './auth.service';
@@ -43,9 +43,9 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login()
       .subscribe(
-      email => this.email = email,
-      err => console.log(err),
-      () => this.loadUser()
+        email => this.email = email,
+        err => console.log(err),
+        () => this.loadUser()
       );
   }
 
@@ -65,5 +65,4 @@ export class LoginComponent implements OnInit {
       this.store.dispatch({ type: LOAD_TODO, payload: todos });
     });
   }
-
 }
