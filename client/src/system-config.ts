@@ -42,6 +42,21 @@ const packages: any = {
     format: 'cjs',
     defaultExtension: 'js',
     main: 'icon.js'
+  },
+  '@angular2-material/input': {
+    format: 'cjs',
+    defaultExtension: 'js',
+    main: 'input.js'
+  },
+  '@angular2-material/radio': {
+    format: 'cjs',
+    defaultExtension: 'js',
+    main: 'radio.js'
+  },
+  '@angular2-material/checkbox': {
+    format: 'cjs',
+    defaultExtension: 'js',
+    main: 'checkbox.js'
   }
 };
 

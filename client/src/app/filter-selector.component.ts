@@ -1,4 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import {MdRadioButton, MdRadioGroup} from '@angular2-material/radio/radio';
+import {MdRadioDispatcher} from '@angular2-material/radio/radio_dispatcher';
 import {
   DISPLAY_ALL, DISPLAY_UNWATCHED, DISPLAY_WATCHED,
   ORDER_NAME, ORDER_NEXT_EPISODE
@@ -13,13 +15,14 @@ import {
         {{filter.name}}
       </option>
     </select>
-    <div *ngFor="let order of orders">
-       <input type="radio" name="showOrders" value="{{order.value}}" 
-        (click)="orderChange.emit(order.value)" /> 
-       {{order.name}}
-    </div>
-   
-  `
+    <md-radio-button name="showOrders" *ngFor="let order of orders" style="margin: 8px"
+      value="{{order.value}}" 
+      (click)="orderChange.emit(order.value)">
+        {{order.name}}
+    </md-radio-button>
+  `,
+  providers: [MdRadioDispatcher],
+  directives: [MdRadioButton, MdRadioGroup]
 })
 export class FilterSelectorComponent implements OnInit {
   filters = [
