@@ -1,3 +1,5 @@
 export default {
-  port: 3000
+  port: 3003,
+  db: 'mongodb://localhost/tvtodo',
+  root: path.join(__dirname, '/../..')
 }

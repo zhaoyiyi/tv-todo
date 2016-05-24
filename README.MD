@@ -18,7 +18,7 @@ JavaScript, Typescript
 - [Angular 2](https://angular.io): core framework for build this project.
 - [Moment.js](http://momentjs.com/): display and manipulate date and time.
 - [Angular Material](https://github.com/angular/material2): quick and easy material design.
-- [ngrx](https://github.com/ngrx/store)(hopefully): it combines two things which I would really like to learn and practice, [Redux](https://github.com/reactjs/redux) and [RxJS](https://github.com/ReactiveX/rxjs).
+- [ngrx](https://github.com/ngrx/store): it combines two things which I would really like to learn and practice, [Redux](https://github.com/reactjs/redux) and [RxJS](https://github.com/ReactiveX/rxjs).
 
 ####Back-end:
 - [Express](http://expressjs.com/): server side framework
@@ -32,10 +32,9 @@ MongoDB
 [The TVDB REST API](https://api.thetvdb.com/swagger)
 
 ###Taks List:
-- [ ] Setup server, database, front end
-- [ ] Wrap TVDB API
-- [ ] Create API to be consumed by front-end
-    - [ ] TVDB
-    - [ ] App related(user login, save todo list ...)
-- [ ] Front end functions
+- [x] Setup server, database, front end
+- [x] Create API to be consumed by front-end
+    - [x] TVDB
+    - [x] App related(user login, save todo list ...)
+- [x] Front end functions
 - [ ] Add beautiful interface
