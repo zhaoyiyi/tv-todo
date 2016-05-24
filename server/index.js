@@ -12,6 +12,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(`${config.root}/client/dist`));
+app.use('/node_modules',express.static(`${config.root}/client/node_modules`));
 app.use('/', routes);
 
 app.get('/', (req, res) => {

@@ -7,7 +7,7 @@ const map: any = {
   'angular2-jwt': 'vendor/angular2-jwt',
   '@ngrx': 'vendor/@ngrx',
   '@angular2-material': 'vendor/@angular2-material',
-  'lodash': 'vendor/lodash/lodash.min.js'
+  'ng2-material': 'vendor/ng2-material'
 };
 
 /** User packages configuration. */
@@ -19,7 +19,7 @@ const packages: any = {
     'defaultExtension': 'js',
     'main': 'index'
   },
-  'lodash': {
+  'ng2-material': {
     'defaultExtension': 'js',
     'main': 'index'
   },
