@@ -20,7 +20,10 @@ export class AuthService {
 
   login(): Observable<string> {
     return Observable.create((subscriber: Subscriber<any>) => {
-      this.lock.showSignin((err, profile, token) => {
+      this.lock.show({
+        connections: ['github', 'google-oauth2'],
+        socialBigButtons: true
+      }, (err, profile, token) => {
         if (err) {
           subscriber.error(err);
         }

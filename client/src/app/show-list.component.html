@@ -17,7 +17,7 @@
         Next episode {{nextEpisodeTime(show).time}}{{nextEpisodeTime(show).date}} 
       </p>
       <p *ngIf="!show.episode.nextEpisode">
-        no next episode information available
+        next episode information is unavailable
       </p>
       <md-card-actions align="end">
         <button md-fab class="md-mini md-warn" (click)="remove.emit(show)">

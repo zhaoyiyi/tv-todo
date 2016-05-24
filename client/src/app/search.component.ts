@@ -10,19 +10,21 @@ import { ShowService } from './show.service';
   moduleId: module.id,
   selector: 'search',
   template: `
-  
     Search <md-input placeholder="TV shows" #search
       (keyup)="searchTerm$.next(search.value)"></md-input>
       
     <md-nav-list 
       style="display: flex; flex-flow: column wrap; align-items: center;">
-      <md-list-item style="width: 50%; text-align: center" 
+      <md-list-item class="search-result" style="width: 50%; text-align: center" 
         *ngFor="let show of results | async" #item
         (click)="onAdd(show)">
           {{show.seriesName}}
       </md-list-item>
     </md-nav-list>
   `,
+  styles: [
+    '.md-list-item { width: 100% }'
+  ],
   directives: [MD_INPUT_DIRECTIVES, MD_LIST_DIRECTIVES]
 })
 export class SearchComponent implements OnInit {
