@@ -17,7 +17,7 @@ module.exports = function(defaults) {
       '@ngrx/**/*.js',
       '@angular2-material/**/*.js',
       'ng2-material/**/*.js',
-      'ng2-toastr/ng2-toastr.js'
+      'ng2-toastr/**/*.js'
     ]
   });
 };
