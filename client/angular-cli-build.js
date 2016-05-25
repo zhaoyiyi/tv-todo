@@ -16,7 +16,8 @@ module.exports = function(defaults) {
       'angular2-jwt/angular2-jwt.js',
       '@ngrx/**/*.js',
       '@angular2-material/**/*.js',
-      'ng2-material/**/*.js'
+      'ng2-material/**/*.js',
+      'ng2-toastr/ng2-toastr.js'
     ]
   });
 };

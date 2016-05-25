@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Rx';
 import { MdButton, MdAnchor } from '@angular2-material/button';
 import { MdToolbar } from '@angular2-material/toolbar/toolbar';
 import { MdIcon } from '@angular2-material/icon';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 import { ADD_TODO, DELETE_TODO, COMPLETE_TODO, UNDO_TODO, UNDO, REDO } from './actions';
 import { isWatched } from './reducers/index';
@@ -23,7 +24,7 @@ import { Show, Undoable, ShowListItem} from './interfaces';
     LoginComponent, ShowListComponent, SearchComponent,
     FilterSelectorComponent, MdButton, MdToolbar, MdIcon
   ],
-  providers: [AuthService, ShowService]
+  providers: [AuthService, ShowService, ToastsManager]
 })
 
 export class TvtodoAppComponent implements OnInit {
@@ -33,6 +34,7 @@ export class TvtodoAppComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private showService: ShowService,
+    private toastr: ToastsManager,
     private store: Store<any>) { }
 
   ngOnInit() {
@@ -74,7 +76,13 @@ export class TvtodoAppComponent implements OnInit {
   onSave() {
     console.log('saving user');
     this.authService.saveUser(this.todos)
-      .subscribe(res => console.log(res));
+      .subscribe(res => {
+        if (res.saved) {
+          this.toastr.success('List Saved');
+        } else {
+          this.toastr.warning('Fail to save list');
+        }
+      });
   }
 
   unComplete(show) {

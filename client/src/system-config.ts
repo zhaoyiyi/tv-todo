@@ -7,7 +7,8 @@ const map: any = {
   'angular2-jwt': 'vendor/angular2-jwt',
   '@ngrx': 'vendor/@ngrx',
   '@angular2-material': 'vendor/@angular2-material',
-  'ng2-material': 'vendor/ng2-material'
+  'ng2-material': 'vendor/ng2-material',
+  'ng2-toastr': 'vendor/ng2-toastr'
 };
 
 /** User packages configuration. */
@@ -22,6 +23,9 @@ const packages: any = {
   'ng2-material': {
     'defaultExtension': 'js',
     'main': 'index'
+  },
+  'ng2-toastr': {
+    'main': 'ng2-toastr.js'
   },
   '@angular2-material/core': {
     format: 'cjs',
