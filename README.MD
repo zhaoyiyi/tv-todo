@@ -38,4 +38,4 @@ MongoDB
     - [x] TVDB
     - [x] App related(user login, save todo list ...)
 - [x] Front end functions
-- [ ] Add beautiful interface
+- [x] Add beautiful interface
