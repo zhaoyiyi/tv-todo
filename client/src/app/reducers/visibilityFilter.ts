@@ -1,7 +1,7 @@
 import { ShowListItem } from '../interfaces';
 import { DISPLAY_WATCHED, DISPLAY_UNWATCHED, DISPLAY_ALL } from '../actions';
 
-export const isWatched = function isWathced(show: ShowListItem) {
+export const isWatched = function isWatched(show: ShowListItem) {
   if (!show.todo || !show.todo.watchedEpisode) return false;
 
   return show.todo.watchedEpisode[0] >= show.episode.airedSeason

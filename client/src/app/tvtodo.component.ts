@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
-import { MdButton, MdAnchor } from '@angular2-material/button';
+import { MdButton } from '@angular2-material/button';
 import { MdToolbar } from '@angular2-material/toolbar/toolbar';
 import { MdIcon } from '@angular2-material/icon';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
@@ -14,7 +14,7 @@ import { SearchComponent } from './search.component';
 import { FilterSelectorComponent } from './filter-selector.component';
 import { AuthService } from './auth.service';
 import { ShowService } from './show.service';
-import { Show, Undoable, ShowListItem} from './interfaces';
+import { Show, Undoable, ShowListItem } from './interfaces';
 @Component({
   moduleId: module.id,
   selector: 'tvtodo-app',
@@ -29,25 +29,33 @@ import { Show, Undoable, ShowListItem} from './interfaces';
 
 export class TvtodoAppComponent implements OnInit {
   todos$: Observable<any>;
+  shows$: Observable<any>;
   todos: Show[];
   isWatched = isWatched;
-  constructor(
-    private authService: AuthService,
-    private showService: ShowService,
-    private toastr: ToastsManager,
-    private store: Store<any>) { }
+
+  constructor(private authService: AuthService,
+              private showService: ShowService,
+              private toastr: ToastsManager,
+              private store: Store<any>) {
+  }
 
   ngOnInit() {
     this.todos$ = Observable.combineLatest(
       this.store.select<Undoable>('todos')
         .pluck('present')
         .mergeMap((todos: Show[]) => this.showService.getDetail(todos)),
-      this.store.select('visibilityFilter'),
       this.store.select('order'),
-      (todos: ShowListItem[], visibilityFilter, order) => {
-        console.log(todos);
-        return order(todos).filter(visibilityFilter);
+      (todos: ShowListItem[], order) => {
+        return order(todos);
       }).share();
+
+    this.shows$ = Observable.combineLatest(
+      this.todos$,
+      this.store.select('visibilityFilter'),
+      (todos, visibilityFilter) => {
+        return todos.filter(visibilityFilter);
+      }
+    );
 
     this.todos$
       .map((todos: ShowListItem[]) => todos.map(item => item.todo))
@@ -69,6 +77,7 @@ export class TvtodoAppComponent implements OnInit {
   onFilterChange(filterName) {
     this.store.dispatch({ type: filterName });
   }
+
   onOrderChange(order) {
     this.store.dispatch({ type: order });
   }

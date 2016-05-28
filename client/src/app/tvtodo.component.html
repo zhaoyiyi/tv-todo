@@ -8,15 +8,15 @@
         <filter-selector (orderChange)="onOrderChange($event)" (filterChange)="onFilterChange($event)">
         </filter-selector>
       </div>
-      
+
       <!-- buttons -->
       <div class="control">
         <button md-raised-button color="primary" (click)="onSave()">save</button>
-        
+
         <button md-mini-fab (click)="undo()">
           <md-icon class="md-24">undo</md-icon>
         </button>
-        
+
         <button md-mini-fab (click)="redo()">
           <md-icon class="md-24">redo</md-icon>
         </button>
@@ -30,7 +30,7 @@
   </div>
 
 
-  <show-list [shows]="todos$ | async" [isWatched]="isWatched" (unComplete)="unComplete($event)" (complete)="completeShow($event)"
+  <show-list [shows]="shows$ | async" [isWatched]="isWatched" (unComplete)="unComplete($event)" (complete)="completeShow($event)"
     (remove)="deleteShow($event)">
   </show-list>
 </div>
