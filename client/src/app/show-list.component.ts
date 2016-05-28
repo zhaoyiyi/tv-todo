@@ -24,12 +24,15 @@ export class ShowListComponent {
   @Output() unComplete = new EventEmitter();
 
   nextEpisodeTime(show: ShowListItem) {
-    const nextEpisodeDate = show.episode.nextEpisode.firstAired;
-    const diff = this.moment(nextEpisodeDate).diff(moment(), 'days');
+    const today = this.moment().format('YYYY-MM-DD');
+    const nextEpisodeDate = this.moment(show.episode.nextEpisode.firstAired);
+    // const diff = nextEpisodeDate.diff(today, 'days');
+    const isToday = this.moment().isSame(nextEpisodeDate, 'day');
     return {
-      time: diff > 0 ? moment().to(nextEpisodeDate) + ' ' : `is today at ${show.detail.airsTime}`,
-      date: diff > 0 ?
-        'on ' + moment(nextEpisodeDate).format('dddd, MMM DD') : ''
+      time: isToday ?
+        `is today at ${show.detail.airsTime}` : this.moment(today).to(nextEpisodeDate) + ' ',
+      date: isToday ?
+        '' : 'on ' + moment(nextEpisodeDate).format('dddd, MMM DD')
     };
   }
 }
