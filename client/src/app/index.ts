@@ -1,2 +1,2 @@
-export {environment} from './environment';
-export {TvtodoAppComponent} from './tvtodo.component';
+export { environment } from './environment';
+export { TvtodoAppComponent } from './tvtodo.component';

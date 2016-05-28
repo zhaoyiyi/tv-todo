@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs/Rx';
-import {MD_INPUT_DIRECTIVES} from '@angular2-material/input/input';
-import {MD_LIST_DIRECTIVES} from '@angular2-material/list/list';
+import { MD_INPUT_DIRECTIVES } from '@angular2-material/input/input';
+import { MD_LIST_DIRECTIVES } from '@angular2-material/list/list';
 
 
 import { ShowService } from './show.service';
@@ -36,9 +36,8 @@ export class SearchComponent implements OnInit {
     .map(term => term.length > 3 ? term : '')
     .switchMap(term => this.showService.search(term));
 
-  constructor(
-    private showService: ShowService,
-    private el: ElementRef) {
+  constructor(private showService: ShowService,
+              private el: ElementRef) {
   }
 
   ngOnInit() {

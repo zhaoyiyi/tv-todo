@@ -10,6 +10,7 @@ export class ShowService {
     detail: DetailResult[];
     newestEpisode: Episode[];
   };
+
   constructor(private http: Http) {
     this.shows = {
       detail: [], newestEpisode: []

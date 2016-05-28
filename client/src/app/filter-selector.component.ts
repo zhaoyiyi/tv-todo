@@ -1,10 +1,13 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import {MdRadioButton, MdRadioGroup} from '@angular2-material/radio/radio';
-import {MdRadioDispatcher} from '@angular2-material/radio/radio_dispatcher';
+import { Component, OnInit, EventEmitter, Output } from "@angular/core";
+import { MdRadioButton, MdRadioGroup } from "@angular2-material/radio/radio";
+import { MdRadioDispatcher } from "@angular2-material/radio/radio_dispatcher";
 import {
-  DISPLAY_ALL, DISPLAY_UNWATCHED, DISPLAY_WATCHED,
-  ORDER_NAME, ORDER_NEXT_EPISODE
-} from './actions';
+  DISPLAY_ALL,
+  DISPLAY_UNWATCHED,
+  DISPLAY_WATCHED,
+  ORDER_NAME,
+  ORDER_NEXT_EPISODE
+} from "./actions";
 
 @Component({
   moduleId: module.id,
@@ -41,8 +44,10 @@ export class FilterSelectorComponent implements OnInit {
   @Output() filterChange = new EventEmitter();
   @Output() orderChange = new EventEmitter();
 
-  constructor() { }
+  constructor() {
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
 }

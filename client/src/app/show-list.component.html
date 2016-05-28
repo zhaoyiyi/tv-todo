@@ -1,12 +1,12 @@
 <div class="todo-list">
-  <md-card *ngFor="let show of shows" >
+  <md-card *ngFor="let show of shows">
     <md-card-heder>
       <md-card-title>{{show.detail.seriesName}}</md-card-title>
     </md-card-heder>
-    <img md-card-image src="http://thetvdb.com/banners/{{show.detail.banner}}" />
+    <img md-card-image src="http://thetvdb.com/banners/{{show.detail.banner}}"/>
     <md-card-content>
       <p>
-        Newest: 
+        Newest:
         <span class="episode">Episode {{show.episode.airedEpisodeNumber}}</span>
         of Season {{show.episode.airedSeason}}
       </p>
@@ -14,7 +14,7 @@
         Watched: Episode {{show.todo.watchedEpisode[1]}} of Season {{show.todo.watchedEpisode[0]}}
       </p>
       <p *ngIf="show.episode.nextEpisode">
-        Next episode {{nextEpisodeTime(show).time}}{{nextEpisodeTime(show).date}} 
+        Next episode {{nextEpisodeTime(show).time}}{{nextEpisodeTime(show).date}}
       </p>
       <p *ngIf="!show.episode.nextEpisode">
         next episode information is unavailable

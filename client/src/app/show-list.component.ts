@@ -14,8 +14,6 @@ import { ShowListItem } from './interfaces';
   directives: [MD_CARD_DIRECTIVES, MATERIAL_DIRECTIVES, MdIcon]
 })
 export class ShowListComponent {
-  moment = moment;
-  displaySeason: boolean = true;
   @Input() shows: Array<ShowListItem>;
   @Input() isWatched: Function;
 
@@ -24,13 +22,12 @@ export class ShowListComponent {
   @Output() unComplete = new EventEmitter();
 
   nextEpisodeTime(show: ShowListItem) {
-    const today = this.moment().format('YYYY-MM-DD');
-    const nextEpisodeDate = this.moment(show.episode.nextEpisode.firstAired);
-    // const diff = nextEpisodeDate.diff(today, 'days');
-    const isToday = this.moment().isSame(nextEpisodeDate, 'day');
+    const today = moment().format('YYYY-MM-DD');
+    const nextEpisodeDate = moment(show.episode.nextEpisode.firstAired);
+    const isToday = moment().isSame(nextEpisodeDate, 'day');
     return {
       time: isToday ?
-        `is today at ${show.detail.airsTime}` : this.moment(today).to(nextEpisodeDate) + ' ',
+        `is today at ${show.detail.airsTime}` : moment(today).to(nextEpisodeDate) + ' ',
       date: isToday ?
         '' : 'on ' + moment(nextEpisodeDate).format('dddd, MMM DD')
     };

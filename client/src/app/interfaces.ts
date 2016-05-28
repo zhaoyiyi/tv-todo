@@ -1,4 +1,4 @@
-import {Reducer} from '@ngrx/store';
+import { Reducer } from '@ngrx/store';
 
 export interface Show {
   id: string;
@@ -8,7 +8,8 @@ export interface Show {
     lastWatched?: number;
     watchedEpisode?: number;
   };
-};
+}
+;
 
 export interface User {
   email: string;

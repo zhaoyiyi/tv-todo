@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { MdToolbar } from '@angular2-material/toolbar/toolbar';
-import { MdButton } from '@angular2-material/button';
-
-import { LOAD_TODO } from './actions';
-import { AuthService } from './auth.service';
+import { Component, OnInit } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { MdToolbar } from "@angular2-material/toolbar/toolbar";
+import { MdButton } from "@angular2-material/button";
+import { LOAD_TODO } from "./actions";
+import { AuthService } from "./auth.service";
 
 @Component({
   moduleId: module.id,
@@ -27,10 +26,8 @@ import { AuthService } from './auth.service';
 export class LoginComponent implements OnInit {
   email: string;
 
-  constructor(
-    private authService: AuthService,
-    private store: Store<any>) {
-
+  constructor(private authService: AuthService,
+              private store: Store<any>) {
   }
 
   ngOnInit() {

@@ -29,8 +29,10 @@
     <search (addShow)="addShow($event)"></search>
   </div>
 
-
-  <show-list [shows]="shows$ | async" [isWatched]="isWatched" (unComplete)="unComplete($event)" (complete)="completeShow($event)"
-    (remove)="deleteShow($event)">
+  <show-list [shows]="shows$ | async"
+             [isWatched]="isWatched"
+             (unComplete)="unComplete($event)"
+             (complete)="completeShow($event)"
+             (remove)="deleteShow($event)">
   </show-list>
 </div>

@@ -31,7 +31,6 @@
     ],
     "quotemark": [
       true,
-      "single",
       "avoid-escape"
     ],
     "semicolon": [true, "always"],
