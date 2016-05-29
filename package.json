@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "angular-cli": {},
-  "scripts": {},
+  "scripts": {
+    "test": "./node_modules//mocha/bin/mocha --compilers js:babel-register"
+  },
   "private": true,
   "dependencies": {
     "angular2-jwt": "^0.1.15",
@@ -16,5 +18,8 @@
     "mongoose": "^4.4.17",
     "request": "^2.72.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
 }
