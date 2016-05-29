@@ -15,7 +15,7 @@ let tvdbRequest = (function () {
   const options = { url: `${API_URL}/login`, json: { apikey: API_KEY } };
 
   let getToken = new Promise((resolve, reject) => {
-    if (!token || Date.now() - token.time > 128000) {
+    if (!token || Date.now() - token.time > 1280000) {
       request.post(options, (err, res, body) => {
         console.log('getting token from server');
         if (err) return reject(err);
@@ -71,21 +71,20 @@ async function newestEpisode(id) {
   let epList = await episodeList(id, season);
   
   return epList.data.reduce((latest, next) => {
-    let nextDiff = moment().diff(moment(next.firstAired));
-    let latestDiff = moment().diff(moment(latest.firstAired));
+    let latestDiff = moment().diff(latest.firstAired, 'days');
+    let nextDiff = moment().diff(next.firstAired, 'days');
 
     // find latest episode
     if (nextDiff < latestDiff && nextDiff > 0) {
       return next;
     }
-
+    
     // find next episode
-    if (nextDiff < 0) {
+    if (nextDiff <= 0) {
       if (!latest.nextEpisode) latest.nextEpisode = next;
-      if (latest.nextEpisode) {
-        let nextEpDiff = moment().diff(moment(latest.nextEpisode.firstAired));
-        latest.nextEpisode = nextDiff > nextEpDiff ? next : latest.nextEpisode;
-      }
+
+      let nextEpDiff = moment().diff(latest.nextEpisode.firstAired, 'days');
+      latest.nextEpisode = nextDiff > nextEpDiff ? next : latest.nextEpisode;
     }
 
     return latest;
