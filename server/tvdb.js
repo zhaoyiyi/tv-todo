@@ -15,7 +15,7 @@ let tvdbRequest = (function () {
   const options = { url: `${API_URL}/login`, json: { apikey: API_KEY } };
 
   let getToken = new Promise((resolve, reject) => {
-    if (!token || Date.now() - token.time > 360000) {
+    if (!token || Date.now() - token.time > 128000) {
       request.post(options, (err, res, body) => {
         console.log('getting token from server');
         if (err) return reject(err);
