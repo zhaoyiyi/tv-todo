@@ -3,7 +3,7 @@ import tvdb from '../tvdb';
 function search(req, res) {
   tvdb.search(req.params.searchText)
       .then(result => {
-        if (result.Error) return res.json([])
+        if (result.Error) return res.json([]);
         res.json(result.data);
       });
 }

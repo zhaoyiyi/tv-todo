@@ -15,8 +15,8 @@ let tvdbRequest = (function () {
   const options = { url: `${API_URL}/login`, json: { apikey: API_KEY } };
 
   let getToken = new Promise((resolve, reject) => {
-    // save token for 23 hours
-    if (!token || (Date.now() - token.time) > 82800000) {
+    // save token for 1 hour
+    if (!token || (Date.now() - token.time) > 3600000) {
       request.post(options, (err, res, body) => {
         console.log('getting token from server');
         if (err) return reject(err);
@@ -90,7 +90,6 @@ async function newestEpisode(id) {
 
     return latest;
   });
-
 }
 
 function search(keyword) {
