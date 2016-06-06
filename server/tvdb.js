@@ -52,10 +52,20 @@ async function requestToPromise(option) {
 async function episodeList(id, season = 1, page) {
   const result = await requestToPromise({
     url: `${API_URL}/series/${id}/episodes/query`,
-    qs: { airedSeason: season, page: page }
+    qs: { airedSeason: season.toString(), page: page }
   });
-  const seasonFirstAired = result.data[0].firstAired;
-  if ( !seasonFirstAired ) return await episodeList(id, season - 1, page);
+  const firstEpisode = result.data.reduce((acc, curr) => {
+    // first aired should less than today's date
+    // it should be valid date
+    // return undefined if doesn't meet requirements
+
+    if ( !acc.firstAired ) return curr;
+    if ( moment(acc.firstAired).diff(moment()) < 0 ) return acc;
+
+    return curr;
+  }, { firstAired: '' });
+
+  if ( !firstEpisode.firstAired ) return await episodeList(id, season - 1, page);
   const lastPage = result.links.last;
   return page === lastPage ?  result : await episodeList(id, season, lastPage);
 }
@@ -72,6 +82,9 @@ async function newestEpisode(id) {
   let epList = await episodeList(id, season);
   
   return epList.data.reduce((latest, next) => {
+    // make sure episode has aired date.
+    if (!latest.firstAired) return next;
+
     let latestDiff = moment().diff(latest.firstAired, 'days');
     let nextDiff = moment().diff(next.firstAired, 'days');
 
