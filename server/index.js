@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 
 import config from './config';
 import routes from './routes';
+import tvdb from './tvdb';
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.db);
@@ -12,8 +13,10 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(`${config.root}/client/dist`));
-app.use('/node_modules',express.static(`${config.root}/client/node_modules`));
+app.use('/node_modules', express.static(`${config.root}/client/node_modules`));
 app.use('/', routes);
+
+tvdb.getToken();
 
 app.get('/', (req, res) => {
   res.sendFile(`${config.root}/client/dist/index.html`)

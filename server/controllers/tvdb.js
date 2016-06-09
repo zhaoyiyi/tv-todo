@@ -17,4 +17,4 @@ function newestEpisode(req, res) {
   tvdb.newestEpisode(req.params.id)
       .then(result => res.json(result));
 }
-export {search, detail, newestEpisode}
+export { search, detail, newestEpisode }

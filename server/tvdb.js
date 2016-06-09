@@ -10,34 +10,36 @@ import moment from 'moment';
 const API_KEY = '65B9367FC41A0AD0';
 const API_URL = 'https://api.thetvdb.com';
 
-let tvdbRequest = (function () {
-  let token;
-  const options = { url: `${API_URL}/login`, json: { apikey: API_KEY } };
+let token = {
+  token: '',
+  time: 0
+};
 
-  let getToken = new Promise((resolve, reject) => {
-    // save token for 1 hour
-    if (!token || (Date.now() - token.time) > 3600000) {
-      request.post(options, (err, res, body) => {
-        console.log('getting token from server');
-        if (err) return reject(err);
-        token = Object.assign({}, body, { time: Date.now() });
-        resolve(token);
-      })
-    } else {
-      resolve(token);
-    }
+const getToken = () => {
+  const options = { url: `${API_URL}/login`, json: { apikey: API_KEY } };
+  return new Promise((resolve, reject) => {
+    request.post(options, (err, res, body) => {
+      console.log('getting token from server');
+      if (err) return reject(err);
+      token = Object.assign({}, body, { time: Date.now() });
+      resolve();
+    })
+  })
+};
+
+const tvdbRequest = async function () {
+  // one hour
+  if (!token.token || (Date.now() - token.time) > 3600000) {
+    await getToken();
+  }
+  return request.defaults({
+    headers: {
+      'Authorization': `Bearer ${token.token}`,
+      'Accept-Language': 'en'
+    },
+    json: true
   });
-  return async function () {
-    token = await getToken;
-    return request.defaults({
-      headers: {
-        'Authorization': `Bearer ${token.token}`,
-        'Accept-Language': 'en'
-      },
-      json: true
-    });
-  };
-})();
+};
 
 async function requestToPromise(option) {
   let request = await tvdbRequest();
@@ -80,7 +82,7 @@ async function newestSeason(id) {
 async function newestEpisode(id) {
   let season = await newestSeason(id);
   let epList = await episodeList(id, season);
-  
+
   return epList.data.reduce((latest, next) => {
     // make sure episode has aired date.
     if (!latest.firstAired) return next;
@@ -92,7 +94,7 @@ async function newestEpisode(id) {
     if (nextDiff < latestDiff && nextDiff > 0) {
       return next;
     }
-    
+
     // find next episode
     if (nextDiff <= 0) {
       if (!latest.nextEpisode) latest.nextEpisode = next;
@@ -116,4 +118,4 @@ function getDetail(id) {
   return requestToPromise({ url: `${API_URL}/series/${id}` });
 }
 
-export default { search, getDetail, newestEpisode };
+export default { getToken, search, getDetail, newestEpisode };
