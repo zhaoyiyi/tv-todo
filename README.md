@@ -1,9 +1,9 @@
-#TV todo list
+# TV todo list
 HTTP 5303 project.
 
-###[Go to website](http://tv-todo.yizhao.me)
-##Project Scope
-###Description
+### [Go to website](http://tv-todo.yizhao.me)
+## Project Scope
+### Description
 An app helps people to keep track of tv shows they are following. Because most tv shows have new episode every week, this app creates a weekly todo list of tv shows.
 
 First, after user adds a show to the list, it reads information about the show, and gets the date for next episode. After that date, user can mark that show as watched, and app will fetch the time for next episode.
@@ -14,22 +14,22 @@ Ideally, when a user opens this app, he or she will be able to know which tv sho
 ###Languages
 
 JavaScript, Typescript
-###Libraries
-####Front-end:
+### Libraries
+#### Front-end:
 - [Angular 2](https://angular.io): core framework for build this project.
 - [Moment.js](http://momentjs.com/): display and manipulate date and time.
 - [Angular Material](https://github.com/angular/material2): quick and easy material design.
 - [ngrx](https://github.com/ngrx/store): it combines two things which I would really like to learn and try, [Redux](https://github.com/reactjs/redux) and [RxJS](https://github.com/ReactiveX/rxjs).
 
-####Back-end:
+#### Back-end:
 - [Express](http://expressjs.com/): server side framework
 - [request](https://github.com/request/request): make http calls to api
 - [mongoose](http://mongoosejs.com/): database connection
 
-####Database:
+#### Database:
 MongoDB
 
-####API:
+#### API:
 [The TVDB REST API](https://api.thetvdb.com/swagger)
 
 ###Taks List:
